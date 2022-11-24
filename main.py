@@ -167,12 +167,15 @@ y_axis_location.grid(column=3, row=1)
 files_frame = Frame(left_frame)
 files_frame.grid()
 
+FILE_PATH = []
+
 
 def get_local_file():
     """ Opens file/s from chosen folder. """
-    file_path = filedialog.askopenfilename(multiple=True)
+    global FILE_PATH
+    FILE_PATH = filedialog.askopenfilename(multiple=True)
     # Takes chosen files path and formats it to, so only filename is left.
-    for file in file_path:
+    for file in FILE_PATH:
         file_name = file.split("/")[-1::]
         files.append(file_name)
     # Inputs these names in a listbox which displays them for user.
@@ -180,8 +183,13 @@ def get_local_file():
     for file_name in files:
         images_listbox.insert("end", file_name)
     for file_image in files:
-        open_images.append(PIL.ImageTk.PhotoImage(
-            PIL.Image.open(f"images/{file_image[0]}")))
+        for path in FILE_PATH:
+            if file_image[0] in path:
+                open_images.append(
+                    PIL.ImageTk.PhotoImage(PIL.Image.open(path)))
+
+        # open_images.append(PIL.ImageTk.PhotoImage(
+        #     PIL.Image.open(f"images/{file_image[0]}")))
 
 
 def print_filename(event):
@@ -190,7 +198,7 @@ def print_filename(event):
     # Defines which image is chosen.
     image_index = images_listbox.curselection()[0]
     # Opens image.
-    CURRENTLY_OPEN_IMAGE = PIL.Image.open(f"images/{files[image_index][0]}")
+    CURRENTLY_OPEN_IMAGE = PIL.Image.open(FILE_PATH[image_index])
     # Setup canvas size to a size of opened image.
     canvas_size = CURRENTLY_OPEN_IMAGE.size
     x_axis_location.configure(to=canvas_size[0])
