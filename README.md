@@ -35,6 +35,7 @@ Now we need to click ```Get text``. Text won't be visible at first because it's 
 ![image](https://user-images.githubusercontent.com/106775028/226755655-50bcc46f-80a0-494c-b549-880b6842fbc9.png)
 
 Once you are happy with your result. Click ```Save results```.
+
 ![image](https://user-images.githubusercontent.com/106775028/226756419-d5ea50f3-96d4-433a-b982-be58901c7554.png)
 
 #### Known limitations
